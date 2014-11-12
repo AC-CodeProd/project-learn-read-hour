@@ -1489,7 +1489,7 @@ Learn_Read_Hour.controller('StartCtrl', function($rootScope, $scope, $route) {
     console.log('StartCtrl');
     $scope.hour = 0;
     $scope.minute = 0;
-    var clock = new Clock();
+    var clock = new Clock('clock-canvas');
     $scope.onIncreaseHour = function() {
         if ($scope.hour < 23)
             $scope.hour++;
