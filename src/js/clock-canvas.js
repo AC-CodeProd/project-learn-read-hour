@@ -27,16 +27,16 @@ var Clock = function(id) {
             height: 300
         });
         layerHour = new Kinetic.Layer({
-            x: 146.5,
+            x: 149.5,
+            y: 145,
+            width: 6,
+            height: 55
+        });
+        layerMinute = new Kinetic.Layer({
+            x: 149.5,
             y: 145,
             width: 6,
             height: 75
-        });
-        layerMinute = new Kinetic.Layer({
-            x: 151.5,
-            y: 145,
-            width: 5,
-            height: 55
         });
 
         imageClock.onload = function() {
@@ -52,10 +52,10 @@ var Clock = function(id) {
         imageHour.onload = function() {
             var hour = new Kinetic.Image({
                 image: imageHour,
-                x: 0,
-                y: 0,
+                x: -3,
+                y: -55,
                 width: 6,
-                height: 75
+                height: 55
             });
             layerHour.add(hour);
             layerHour.draw();
@@ -64,18 +64,18 @@ var Clock = function(id) {
         imageMinute.onload = function() {
             var minute = new Kinetic.Image({
                 image: imageMinute,
-                x: 0,
-                y: 0,
-                width: 5,
-                height: 55
+                x: -3,
+                y: -75,
+                width: 6,
+                height: 75
             });
             layerMinute.add(minute);
             layerMinute.draw();
         }
 
         imageClock.src = 'assets/img/clock1.png';
-        imageHour.src = 'assets/img/firstHand.png';
-        imageMinute.src = 'assets/img/secondHand.png';
+        imageHour.src = 'assets/img/secondHand.png';
+        imageMinute.src = 'assets/img/firstHand.png';
         stage.add(layerClock, layerHour, layerMinute);
     };
 

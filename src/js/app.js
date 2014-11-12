@@ -40,20 +40,30 @@ Learn_Read_Hour.controller('StartCtrl', function($rootScope, $scope, $route) {
     console.log('StartCtrl');
     $scope.hour = 0;
     $scope.minute = 0;
-    var now = new Date();
-    var sec = now.getSeconds();
-    var min = now.getMinutes();
-    var hr = now.getHours();
-    hr = hr >= 12 ? hr - 12 : hr;
+    $scope.clock = {};
+    $scope.clock.hour = Math.floor((Math.random() * 23) + 0);
+    $scope.clock.minute = Math.floor((Math.random() * 59) + 0);
 
-    console.log("hr " + hr);
-    console.log("min " + min);
-    console.log("sec " + sec);
-    console.log("pi/6 " + (Math.PI / 6));
+    while (($scope.clock.minute % 5) != 0) {
+        $scope.clock.minute = Math.floor((Math.random() * 59) + 0);
+    }
+    if ($scope.clock.hour > 18) {
+        $scope.clock.info = "soir";
+    } else if ($scope.clock.hour > 12) {
+        $scope.clock.info = "après-midi";
+    } else {
+        $scope.clock.info = "matin";
+    }
+
+    $scope.clock.hour = $scope.clock.hour > 12 ? $scope.clock.hour - 12 : $scope.clock.hour;
+
+    $scope.clock.hour = $scope.clock.hour + $scope.clock.minute / 60;
+    var degHour = $scope.clock.hour * 360 / 12;
+    var degMinute = $scope.clock.minute * 360 / 60;
+
     var clock = new Clock('clock-canvas');
-    clock.onRotateHour(hr * (Math.PI / 6) + (Math.PI / 360) * min + (Math.PI / 21600) * sec);
-    clock.onRotateMinute((Math.PI / 30) * min + (Math.PI / 1800) * sec);
-    // clock.onRotateMinute(180);
+    clock.onRotateHour(degHour);
+    clock.onRotateMinute(degMinute);
 
     $scope.onIncreaseHour = function() {
         if ($scope.hour < 23)
