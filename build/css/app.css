@@ -9,3 +9,46 @@ body {
       -ms-user-select: none;
           user-select: none;
 }
+* {
+  outline: none;
+}
+.panel-options-game {
+  top: 165px;
+}
+.button {
+  width: 100%;
+  background: transparent;
+  border: none;
+}
+.panel-choice-clock button {
+  background: transparent;
+  border: none;
+}
+.options-title {
+  color: #FFF;
+  text-align: center;
+}
+.panel-start-game .hour {
+  background-image: url('../assets/img/span.png');
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center center;
+  background-size: cover;
+  border: none;
+  text-align: center;
+  font-size: 6em;
+  background-origin: padding-box;
+  height: 90px;
+}
+.panel-start-game .minute {
+  background-image: url('../assets/img/span.png');
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center center;
+  background-size: cover;
+  border: none;
+  text-align: center;
+  font-size: 6em;
+  background-origin: padding-box;
+  height: 90px;
+}

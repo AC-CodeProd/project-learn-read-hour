@@ -93,3 +93,17 @@ body {
     font-size: 100%;
     user-select: none;
 }
+*{
+    outline: none;
+}
+.panel-options-game {
+    top: 165px;
+}
+.button {
+    width: 100%;
+    background:transparent;
+    border: none;
+}
+.options{
+
+}

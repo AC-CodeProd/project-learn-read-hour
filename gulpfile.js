@@ -6,7 +6,8 @@ var plugins = require("gulp-load-plugins")({
 
 var pathsSrc = {
     index: 'src/index.html',
-    less: ['src/less/*.less','!src/less/components/**/*.less', '!src/less/modules/*.less', '!src/less/utilities/**/*.less'],
+    partials: 'src/partials/*',
+    less: ['src/less/*.less', '!src/less/components/**/*.less', '!src/less/modules/*.less', '!src/less/utilities/**/*.less'],
     lessWatch: ['src/less/**/*.less'],
     scripts: ['src/js/*.js', '!src/js/datas.js'],
     images: 'src/assets/img/**/*',
@@ -28,8 +29,6 @@ gulp.task('fonts', function() {
     return gulp.src(pathsSrc.fonts)
         .pipe(gulp.dest('build/assets/fonts'));
 });
-
-
 gulp.task('index', function() {
     var assets = plugins.useref.assets();
     return gulp.src(pathsSrc.index)
@@ -38,6 +37,10 @@ gulp.task('index', function() {
         .pipe(assets.restore())
         .pipe(plugins.useref())
         .pipe(gulp.dest('build'));
+});
+gulp.task('partials', function() {
+    return gulp.src(pathsSrc.partials)
+        .pipe(gulp.dest('build/partials'));
 });
 gulp.task('less', function() {
     return gulp.src(pathsSrc.less)
@@ -70,6 +73,7 @@ gulp.task('images', function() {
 gulp.task('watch', function() {
     var server = plugins.livereload();
     gulp.watch(pathsSrc.index, ['index']);
+    gulp.watch(pathsSrc.partials, ['partials']);
     gulp.watch(pathsSrc.fontAwesome, ['font-awesome']);
     gulp.watch(pathsSrc.fonts, ['fonts']);
     gulp.watch(pathsSrc.lessWatch, ['less']);
@@ -79,4 +83,4 @@ gulp.task('watch', function() {
         server.changed(event.path);
     });
 });
-gulp.task('default', ['watch', 'index', 'less', 'images', 'font-awesome', 'fonts', 'scripts']);
+gulp.task('default', ['watch', 'index', 'partials', 'less', 'images', 'font-awesome', 'fonts', 'scripts']);

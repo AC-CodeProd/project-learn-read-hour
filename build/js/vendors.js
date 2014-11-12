@@ -1446,13 +1446,36 @@ p.directive("ngView",u);p.directive("ngView",z);u.$inject=["$route","$anchorScro
 var Learn_Read_Hour = angular.module('Learn_Read_Hour', ['ngRoute']);
 
 /**
-* Factory & Directive
-**/
+ * Configuring Routes
+ **/
+Learn_Read_Hour.config(function($routeProvider) {
+    $routeProvider.when('/' , {
+        templateUrl: 'partials/home.html',
+        controller: 'HomeCtrl'
+    }).when('/start' , {
+        templateUrl: 'partials/start.html'
+    }).when('/options' , {
+        templateUrl: 'partials/options.html'
+    }).when('/credits' , {
+        templateUrl: 'partials/credits.html'
+    });
+    $routeProvider.otherwise({
+        templateUrl: "partials/404.html"
+    });
+});
 
 /**
-* Controller
-**/
+ * Factory & Directive
+ **/
+
+/**
+ * Controller
+ **/
 Learn_Read_Hour.controller('PageCtrl', function($rootScope, $scope, $route) {
     console.log('PageCtrl');
+
+});
+Learn_Read_Hour.controller('HomeCtrl', function($rootScope, $scope, $route) {
+    console.log('HomeCtrl');
 
 });
