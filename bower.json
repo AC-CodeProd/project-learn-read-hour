@@ -27,6 +27,7 @@
     "more-or-less": "~1.5.1",
     "underscore": "~1.7.0",
     "toastr": "~2.1.0",
-    "kineticjs": "~5.1.0"
+    "kineticjs": "~5.1.0",
+    "ngDialog": "~0.3.4"
   }
 }

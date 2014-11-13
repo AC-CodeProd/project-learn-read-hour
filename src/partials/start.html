@@ -1,22 +1,19 @@
-<button class="button" onclick="location.href='#'"><img class="img-responsive" src="../build/assets/img/retour.png" alt="Retour"></button>
-<button ng-click="onRotateMinute()" >onRotateMinute</button>
-<button ng-click="onRotateHour()" >onRotateHour</button>
+<button class="button-return" onclick="location.href='#'"><img class="img-responsive" src="../build/assets/img/retour.png" alt="Retour"></button>
 <section class="panel-start-game col-lg-4 col-lg-offset-4">
     <div id="clock-canvas" class="clock-canvas"></div>
-    <!-- <img class="img-responsive" src="../build/assets/img/clock1.png" alt="Vérifier"> -->
-    <p>{{clock.info}}</p>
+    <p class="info">{{clock.info}}</p>
     <div class="row">
         <div class="col-lg-2">
             <button class="button" ng-click="onIncreaseHour()" ><img class="img-responsive" src="../build/assets/img/button_up.png" alt="Vérifier"></button>
             <button class="button" ng-click="onDecreaseHour()"><img class="img-responsive" src="../build/assets/img/button_down.png" alt="Vérifier"></button>
         </div>
         <input type="text" id="hour" class="hour col-lg-3" ng-model="hour" required>
-        <p class="col-lg-2" >h</p>
+        <p class="h col-lg-2" >h</p>
         <input type="text" id="minute" class="minute col-lg-3" ng-model="minute" required>
         <div class="col-lg-2">
             <button class="button" ng-click="onIncreaseMinute()" ><img class="img-responsive" src="../build/assets/img/button_up.png" alt="Vérifier"></button>
             <button class="button" ng-click="onDecreaseMinute()"><img class="img-responsive" src="../build/assets/img/button_down.png" alt="Vérifier"></button>
         </div>
     </div>
-    <button class="button"><img class="img-responsive" src="../build/assets/img/verify.png" alt="Vérifier"></button>
+    <button class="button" ng-click="onMatchedTimeClock()"><img class="img-responsive" src="../build/assets/img/verify.png" alt="Vérifier"></button>
 </section>

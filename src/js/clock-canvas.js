@@ -7,7 +7,6 @@ var Clock = function(id) {
     var imageClock = new Image();
     var imageHour = new Image();
     var imageMinute = new Image();
-    var deg = [-180, -150, -120, -90, -60, -30, 0, 30, 60, 90, 120, 150, 180, -150, -120, -90, -60, -30, 0, 30, 60, 90, 120, 150, 180];
 
     _self.construct = function() {
         _self.init();
@@ -79,14 +78,13 @@ var Clock = function(id) {
         stage.add(layerClock, layerHour, layerMinute);
     };
 
-    _self.onRotateHour = function(hour) {
-        // layerHour.rotate(deg[hour]);
-        layerHour.rotate(hour);
+    _self.onRotateHour = function(deg) {
+        layerHour.rotate(deg);
         layerHour.draw();
     };
 
-    _self.onRotateMinute = function(minute) {
-        layerMinute.rotate(minute);
+    _self.onRotateMinute = function(deg) {
+        layerMinute.rotate(deg);
         layerMinute.draw();
     };
 

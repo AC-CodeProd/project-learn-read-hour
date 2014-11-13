@@ -7,17 +7,23 @@ body {
     background-position: top center;
     font-size: 100%;
     user-select: none;
+    padding-top: 160px;
 }
 * {
     outline: none;
 }
 .panel-options-game {
-    top: 165px;
 }
 .button {
     width: 100%;
     background: transparent;
     border: none;
+    &-return {
+        position: absolute;
+        top: 30px;
+        background: transparent;
+        border: none;
+    }
 }
 .panel-choice-clock {
     button {
@@ -32,6 +38,19 @@ body {
     }
 }
 .panel-start-game {
+    .clock-canvas {
+        margin-left: 30px;
+    }
+    .info {
+        font-size: 2em;
+        color: #FFF;
+        text-align: center;
+    }
+    .h {
+        font-size: 6em;
+        text-align: center;
+        color: #000;
+    }
     .hour {
         background-image: url('../assets/img/span.png');
         background-repeat: no-repeat;
