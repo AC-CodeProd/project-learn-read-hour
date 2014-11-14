@@ -1,40 +1,37 @@
 @import 'utilities/_colors.less';
 @import 'utilities/_mixins.less';
 body {
+    font-size: 100%;
+    padding-top: 100px;
+    user-select: none;
     background-image: url(../assets/img/background.png);
     background-repeat: no-repeat;
-    background-size: cover;
     background-position: top center;
-    font-size: 100%;
-    user-select: none;
-    padding-top: 160px;
+    background-size: cover;
 }
 * {
     outline: none;
 }
-.panel-options-game {
-}
 .button {
-    width: 100%;
-    background: transparent;
     border: none;
+    background: transparent;
     &-return {
         position: absolute;
         top: 30px;
-        background: transparent;
         border: none;
+        background: transparent;
     }
 }
 .panel-choice-clock {
     button {
-        background: transparent;
         border: none;
+        background: transparent;
     }
 }
 .options {
     &-title {
-        color: #FFF;
         text-align: center;
+        color: #fff;
     }
 }
 .panel-start-game {
@@ -43,8 +40,8 @@ body {
     }
     .info {
         font-size: 2em;
-        color: #FFF;
         text-align: center;
+        color: #fff;
     }
     .h {
         font-size: 6em;
@@ -52,27 +49,51 @@ body {
         color: #000;
     }
     .hour {
+        font-size: 6em;
+        height: 90px;
+        text-align: center;
+        border: none;
+        background-color: transparent;
         background-image: url('../assets/img/span.png');
         background-repeat: no-repeat;
-        background-color: transparent;
         background-position: center center;
-        background-size: cover;
-        border: none;
-        text-align: center;
-        font-size: 6em;
         background-origin: padding-box;
-        height: 90px;
+        background-size: cover;
     }
     .minute {
+        font-size: 6em;
+        height: 90px;
+        text-align: center;
+        border: none;
+        background-color: transparent;
         background-image: url('../assets/img/span.png');
         background-repeat: no-repeat;
-        background-color: transparent;
+        background-position: center center;
+        background-origin: padding-box;
+        background-size: cover;
+    }
+}
+.ngdialog.ngdialog-theme-default {
+    & .ngdialog-content {
+       background-color: transparent;
+        background-image: url('../assets/img/span.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-origin: padding-box;
+        background-size: cover;
+        overflow: hidden;
+    }
+    & .ngdialog-close {
+        top: -25px;
+        right: -20px;
+        width: 60px;
+        height: 60px;
+        background-image: url('../assets/img/cross.png');
+        background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
-        border: none;
-        text-align: center;
-        font-size: 6em;
-        background-origin: padding-box;
-        height: 90px;
+        &:before {
+            display: none;
+        }
     }
 }

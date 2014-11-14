@@ -1555,7 +1555,12 @@ Learn_Read_Hour.controller('StartCtrl', function($rootScope, $scope, $route, ngD
             console.log("Clock " + $scope.clock.hour + " : " + $scope.clock.minute);
             console.log("Input " + $scope.hour + " : " + $scope.minute);
             ngDialog.open({
-                template: '<p>my template</p>',
+                template: '\
+                <p>Are you sure you want to close the parent dialog?</p>\
+                <div class="ngdialog-buttons row">\
+                    <button type="button" class="button col-lg-6" ><img class="img-responsive" src="../build/assets/img/button_menu.png" alt="Vérifier"></button>\
+                    <button type="button" class="button col-lg-6" ><img class="img-responsive" src="../build/assets/img/button_replay.png" alt="Vérifier"></button>\
+                </div>',
                 plain: true
             });
         }
