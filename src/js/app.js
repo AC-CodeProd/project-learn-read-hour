@@ -57,11 +57,7 @@ LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $lo
             $scope.clock.info = "matin";
         }
 
-        var tmpHour = $scope.clock.hour > 12 ? $scope.clock.hour - 12 : $scope.clock.hour + $scope.clock.minute / 60;
-        var degHour = tmpHour * 360 / 12;
-        var degMinute = $scope.clock.minute * 360 / 60;
-        clock.onRotateHour(degHour);
-        clock.onRotateMinute(degMinute);
+        clock.setTime($scope.clock.hour,$scope.clock.minute);
         clock.onChangeClock($rootScope.colorClock);
     };
 

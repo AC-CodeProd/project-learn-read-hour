@@ -77,10 +77,16 @@ var Clock = function(id) {
         imageMinute.src = 'assets/img/firstHand.png';
         stage.add(layerClock, layerHour, layerMinute);
     };
-    _self.onChangeClock = function(clock){
-         imageClock.src = 'assets/img/'+clock+'.png';
+    _self.onChangeClock = function(clock) {
+        imageClock.src = 'assets/img/' + clock + '.png';
     }
-
+    _self.setTime = function(hour, minute) {
+        var tmpHour = hour > 12 ? hour - 12 : hour + minute / 60;
+        var degHour = tmpHour * 360 / 12;
+        var degMinute = minute * 360 / 60;
+        _self.onRotateHour(degHour);
+        _self.onRotateMinute(degMinute);
+    }
     _self.onRotateHour = function(deg) {
         layerHour.rotate(deg);
         layerHour.draw();
