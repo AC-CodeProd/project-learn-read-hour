@@ -15,6 +15,7 @@ body {
 .button {
     border: none;
     background: transparent;
+    padding:0;
     &-return {
         position: absolute;
         top: 30px;
@@ -22,11 +23,11 @@ body {
         background: transparent;
     }
 }
+.panel-options-game{
+    margin-top: 60px;
+}
 .panel-choice-clock {
-    button {
-        border: none;
-        background: transparent;
-    }
+
 }
 .options {
     &-title {
@@ -48,16 +49,18 @@ body {
         text-align: center;
         color: #000;
     }
+    .dial{
+
+    }
     .hour {
         font-size: 6em;
         height: 90px;
         text-align: center;
         border: none;
         background-color: transparent;
-        background-image: url('../assets/img/span.png');
+        background-image: url(../assets/img/span.png);
         background-repeat: no-repeat;
         background-position: center center;
-        background-origin: padding-box;
         background-size: cover;
     }
     .minute {
@@ -66,29 +69,31 @@ body {
         text-align: center;
         border: none;
         background-color: transparent;
-        background-image: url('../assets/img/span.png');
+        background-image: url(../assets/img/span.png);
         background-repeat: no-repeat;
         background-position: center center;
-        background-origin: padding-box;
         background-size: cover;
     }
 }
 .ngdialog.ngdialog-theme-default {
+    & .ngdialog-buttons {
+padding-left: 20px;
+padding-right: 20px;
+}
     & .ngdialog-content {
        background-color: transparent;
-        background-image: url('../assets/img/span.png');
+        background-image: url(../assets/img/span.png);
         background-repeat: no-repeat;
         background-position: center center;
         background-origin: padding-box;
         background-size: cover;
-        overflow: hidden;
     }
     & .ngdialog-close {
         top: -25px;
         right: -20px;
         width: 60px;
         height: 60px;
-        background-image: url('../assets/img/cross.png');
+        background-image: url(../assets/img/cross.png);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;

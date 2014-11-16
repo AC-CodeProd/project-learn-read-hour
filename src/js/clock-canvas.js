@@ -77,6 +77,9 @@ var Clock = function(id) {
         imageMinute.src = 'assets/img/firstHand.png';
         stage.add(layerClock, layerHour, layerMinute);
     };
+    _self.onChangeClock = function(clock){
+         imageClock.src = 'assets/img/'+clock+'.png';
+    }
 
     _self.onRotateHour = function(deg) {
         layerHour.rotate(deg);

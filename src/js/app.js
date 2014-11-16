@@ -1,10 +1,10 @@
 'use strict';
-var Learn_Read_Hour = angular.module('Learn_Read_Hour', ['ngRoute', 'ngDialog']);
+var LearnReadHour = angular.module('LearnReadHour', ['ngRoute', 'ngDialog']);
 
 /**
  * Configuring Routes
  **/
-Learn_Read_Hour.config(function($routeProvider) {
+LearnReadHour.config(function($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'partials/home.html',
         controller: 'HomeCtrl'
@@ -12,7 +12,8 @@ Learn_Read_Hour.config(function($routeProvider) {
         templateUrl: 'partials/start.html',
         controller: 'StartCtrl'
     }).when('/options', {
-        templateUrl: 'partials/options.html'
+        templateUrl: 'partials/options.html',
+        controller: 'OptionsCtrl'
     }).when('/credits', {
         templateUrl: 'partials/credits.html'
     });
@@ -28,102 +29,135 @@ Learn_Read_Hour.config(function($routeProvider) {
 /**
  * Controller
  **/
-Learn_Read_Hour.controller('PageCtrl', function($rootScope, $scope, $route) {
-    console.log('PageCtrl');
-
+LearnReadHour.controller('PageCtrl', function($rootScope, $scope) {
+    if (!angular.isDefined($rootScope.colorClock))
+        $rootScope.colorClock = 'clock1';
 });
-Learn_Read_Hour.controller('HomeCtrl', function($rootScope, $scope, $route) {
-    console.log('HomeCtrl');
+LearnReadHour.controller('HomeCtrl', function($rootScope, $scope) {});
 
-});
-Learn_Read_Hour.controller('StartCtrl', function($rootScope, $scope, $route, ngDialog) {
-    console.log('StartCtrl');
-    $scope.hour = 0;
-    $scope.minute = 0;
+LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $location) {
+    $scope.location = $location;
     $scope.clock = {};
-    $scope.clock.hour = Math.floor((Math.random() * 23) + 0);
-    $scope.clock.minute = Math.floor((Math.random() * 55) + 0);
-
-    while (($scope.clock.minute % 5) != 0) {
+    $scope.onStartGame = function() {
+        var clock = new Clock('clock-canvas');
+        $scope.hour = 0;
+        $scope.minute = 0;
+        $scope.clock.hour = Math.floor((Math.random() * 23) + 0);
         $scope.clock.minute = Math.floor((Math.random() * 55) + 0);
-    }
-    if ($scope.clock.hour > 18) {
-        $scope.clock.info = "soir";
-    } else if ($scope.clock.hour > 12) {
-        $scope.clock.info = "après-midi";
-    } else {
-        $scope.clock.info = "matin";
-    }
 
-    var tmpHour = $scope.clock.hour > 12 ? $scope.clock.hour - 12 : $scope.clock.hour + $scope.clock.minute / 60;
-    var degHour = tmpHour * 360 / 12;
-    var degMinute = $scope.clock.minute * 360 / 60;
+        while (($scope.clock.minute % 5) != 0) {
+            $scope.clock.minute = Math.floor((Math.random() * 55) + 0);
+        }
 
-    var clock = new Clock('clock-canvas');
-    clock.onRotateHour(degHour);
-    clock.onRotateMinute(degMinute);
+        if ($scope.clock.hour > 18) {
+            $scope.clock.info = "soir";
+        } else if ($scope.clock.hour >= 12) {
+            $scope.clock.info = "après-midi";
+        } else {
+            $scope.clock.info = "matin";
+        }
+
+        var tmpHour = $scope.clock.hour > 12 ? $scope.clock.hour - 12 : $scope.clock.hour + $scope.clock.minute / 60;
+        var degHour = tmpHour * 360 / 12;
+        var degMinute = $scope.clock.minute * 360 / 60;
+        clock.onRotateHour(degHour);
+        clock.onRotateMinute(degMinute);
+        clock.onChangeClock($rootScope.colorClock);
+    };
+
+    $scope.onReloadGame = function() {
+        $scope.onStartGame();
+        $scope.$apply();
+    };
 
     $scope.onIncreaseHour = function() {
         if ($scope.hour < 23)
             $scope.hour++;
     };
+
     $scope.onIncreaseMinute = function() {
         if ($scope.minute < 60)
-            $scope.minute+=5;
+            $scope.minute += 5;
         if ($scope.minute == 60) {
             $scope.minute = 0;
             $scope.onIncreaseHour();
         }
     };
-    $scope.onDecreaseHour = function() {
+
+    $scope.onDecreasedHour = function() {
         if ($scope.hour != 0)
             $scope.hour--;
     };
-    $scope.onDecreaseMinute = function() {
+
+    $scope.onDecreasedMinute = function() {
         if ($scope.minute != 0)
-            $scope.minute-=5;
+            $scope.minute -= 5;
         if ($scope.minute == 0) {
             $scope.minute = 55;
-            $scope.onDecreaseHour();
+            $scope.onDecreasedHour();
         }
     };
 
     $scope.onMatchedTimeClock = function() {
         if ($scope.clock.hour == $scope.hour && $scope.clock.minute == $scope.minute) {
-            console.log("Win");
             ngDialog.open({
+                preCloseCallback: function(value) {
+                    if (value == 0) {
+                        $scope.location.path("/");
+                    }
+                    if (value == '$document') {
+                        $scope.onReloadGame();
+                    }
+                },
                 scope: $scope,
-                template:'
+                template: '
                 <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-10 col-lg-offset-1">
                 <img class="img-responsive" src="../build/assets/img/success.png" alt="Bravo !">
                 </div>
                 <div class="ngdialog-buttons">
-                    <button type="button" class="button col-lg-6" ><img class="img-responsive" src="../build/assets/img/button_menu.png" alt="Menu"></button>
-                    <button type="button" class="button col-lg-6" ><img class="img-responsive" src="../build/assets/img/button_replay.png" alt="Rejouer"></button>
+                    <button type="button" class="button col-lg-6" ng-click="closeThisDialog(0)" ><img class="img-responsive" src="../build/assets/img/button_menu.png" alt="Menu"></button>
+                    <button type="button" class="button col-lg-6" ng-click="onReloadGame()"><img class="img-responsive" src="../build/assets/img/button_replay.png" alt="Rejouer"></button>
                 </div>
                 </div>',
                 plain: true
             });
+
         } else {
-            console.log("Loser");
-            console.log("Clock " + $scope.clock.hour + " : " + $scope.clock.minute);
-            console.log("Input " + $scope.hour + " : " + $scope.minute);
             ngDialog.open({
+                preCloseCallback: function(value) {
+                    if (value == 0) {
+                        $scope.location.path("/");
+                    }
+                    if (value == '$document') {
+                        $scope.onReloadGame();
+                    }
+                },
                 scope: $scope,
-                template:'
+                template: '
                 <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-10 col-lg-offset-1">
                 <img class="img-responsive" src="../build/assets/img/fail.png" alt="Raté !">
                 <p>L\'heure exacte était : {{clock.hour}} h {{clock.minute}}</p>
                 </div>
                 <div class="ngdialog-buttons">
-                    <button type="button" class="button col-lg-6" ><img class="img-responsive" src="../build/assets/img/button_menu.png" alt="Menu"></button>
-                    <button type="button" class="button col-lg-6" ><img class="img-responsive" src="../build/assets/img/button_replay.png" alt="Rejouer"></button>
+                    <button type="button" class="button col-lg-6" ng-click="closeThisDialog(0)"><img class="img-responsive" src="../build/assets/img/button_menu.png" alt="Menu"></button>
+                    <button type="button" class="button col-lg-6" ng-click="onReloadGame()"><img class="img-responsive" src="../build/assets/img/button_replay.png" alt="Rejouer"></button>
                 </div>
                 </div>',
                 plain: true
             });
         }
+    };
+
+    $scope.onStartGame();
+
+});
+LearnReadHour.controller('OptionsCtrl', function($rootScope, $scope, $location) {
+    $scope.onChangeClock = function(color) {
+        $rootScope.colorClock = color;
+        $location.path("/");
+        toastr.clear();
+        toastr.success('Sauvegarde réussie');
     };
 });
