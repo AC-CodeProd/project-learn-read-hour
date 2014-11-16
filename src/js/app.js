@@ -71,8 +71,10 @@ LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $lo
     };
 
     $scope.onIncreaseHour = function() {
-        if ($scope.hour < 23)
+        if ($scope.hour < 24)
             $scope.hour++;
+        if ($scope.hour == 24)
+            $scope.hour=0;
     };
 
     $scope.onIncreaseMinute = function() {
@@ -87,6 +89,9 @@ LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $lo
     $scope.onDecreasedHour = function() {
         if ($scope.hour != 0)
             $scope.hour--;
+        if ($scope.hour == 0) {
+            $scope.hour = 23;
+        }
     };
 
     $scope.onDecreasedMinute = function() {
@@ -105,7 +110,7 @@ LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $lo
                     if (value == 0) {
                         $scope.location.path("/");
                     }
-                    if (value == '$document') {
+                    if (value == '$document'||value == '$closeButton'||value == 1) {
                         $scope.onReloadGame();
                     }
                 },
@@ -117,7 +122,7 @@ LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $lo
                 </div>
                 <div class="ngdialog-buttons">
                     <button type="button" class="button col-lg-6" ng-click="closeThisDialog(0)" ><img class="img-responsive" src="../build/assets/img/button_menu.png" alt="Menu"></button>
-                    <button type="button" class="button col-lg-6" ng-click="onReloadGame()"><img class="img-responsive" src="../build/assets/img/button_replay.png" alt="Rejouer"></button>
+                    <button type="button" class="button col-lg-6" ng-click="closeThisDialog(1)"><img class="img-responsive" src="../build/assets/img/button_replay.png" alt="Rejouer"></button>
                 </div>
                 </div>',
                 plain: true
@@ -129,7 +134,7 @@ LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $lo
                     if (value == 0) {
                         $scope.location.path("/");
                     }
-                    if (value == '$document') {
+                    if (value == '$document'||value == '$closeButton'||value == 1) {
                         $scope.onReloadGame();
                     }
                 },
@@ -142,7 +147,7 @@ LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $lo
                 </div>
                 <div class="ngdialog-buttons">
                     <button type="button" class="button col-lg-6" ng-click="closeThisDialog(0)"><img class="img-responsive" src="../build/assets/img/button_menu.png" alt="Menu"></button>
-                    <button type="button" class="button col-lg-6" ng-click="onReloadGame()"><img class="img-responsive" src="../build/assets/img/button_replay.png" alt="Rejouer"></button>
+                    <button type="button" class="button col-lg-6" ng-click="closeThisDialog(1)"><img class="img-responsive" src="../build/assets/img/button_replay.png" alt="Rejouer"></button>
                 </div>
                 </div>',
                 plain: true

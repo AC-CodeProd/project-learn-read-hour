@@ -14,9 +14,9 @@ body {
   outline: none;
 }
 .button {
+  padding: 0;
   border: none;
   background: transparent;
-  padding: 0;
 }
 .button-return {
   position: absolute;
@@ -41,7 +41,9 @@ body {
 }
 .panel-start-game .h {
   font-size: 6em;
+  display: inline-block;
   text-align: center;
+  vertical-align: middle;
   color: #000;
 }
 .panel-start-game .hour {
@@ -67,8 +69,8 @@ body {
   background-size: cover;
 }
 .ngdialog.ngdialog-theme-default .ngdialog-buttons {
-  padding-left: 20px;
   padding-right: 20px;
+  padding-left: 20px;
 }
 .ngdialog.ngdialog-theme-default .ngdialog-content {
   background-color: transparent;

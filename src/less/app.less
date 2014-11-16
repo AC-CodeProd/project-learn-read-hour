@@ -13,9 +13,9 @@ body {
     outline: none;
 }
 .button {
+    padding: 0;
     border: none;
     background: transparent;
-    padding:0;
     &-return {
         position: absolute;
         top: 30px;
@@ -23,11 +23,8 @@ body {
         background: transparent;
     }
 }
-.panel-options-game{
+.panel-options-game {
     margin-top: 60px;
-}
-.panel-choice-clock {
-
 }
 .options {
     &-title {
@@ -46,10 +43,12 @@ body {
     }
     .h {
         font-size: 6em;
+        display: inline-block;
         text-align: center;
+        vertical-align: middle;
         color: #000;
     }
-    .dial{
+    .choice {
 
     }
     .hour {
@@ -77,11 +76,11 @@ body {
 }
 .ngdialog.ngdialog-theme-default {
     & .ngdialog-buttons {
-padding-left: 20px;
-padding-right: 20px;
-}
+        padding-right: 20px;
+        padding-left: 20px;
+    }
     & .ngdialog-content {
-       background-color: transparent;
+        background-color: transparent;
         background-image: url(../assets/img/span.png);
         background-repeat: no-repeat;
         background-position: center center;
