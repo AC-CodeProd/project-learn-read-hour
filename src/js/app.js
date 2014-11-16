@@ -35,7 +35,7 @@ LearnReadHour.controller('PageCtrl', function($rootScope, $scope) {
 });
 LearnReadHour.controller('HomeCtrl', function($rootScope, $scope) {});
 
-LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $location) {
+LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $location, $timeout) {
     $scope.location = $location;
     $scope.clock = {};
     $scope.onStartGame = function() {
@@ -57,20 +57,21 @@ LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $lo
             $scope.clock.info = "matin";
         }
 
-        clock.setTime($scope.clock.hour,$scope.clock.minute);
+        clock.setTime($scope.clock.hour, $scope.clock.minute);
         clock.onChangeClock($rootScope.colorClock);
     };
 
     $scope.onReloadGame = function() {
-        $scope.onStartGame();
-        $scope.$apply();
+        $timeout(function() {
+            $scope.onStartGame();
+        }, 200);
     };
 
     $scope.onIncreaseHour = function() {
         if ($scope.hour < 24)
             $scope.hour++;
         if ($scope.hour == 24)
-            $scope.hour=0;
+            $scope.hour = 0;
     };
 
     $scope.onIncreaseMinute = function() {
@@ -106,7 +107,7 @@ LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $lo
                     if (value == 0) {
                         $scope.location.path("/");
                     }
-                    if (value == '$document'||value == '$closeButton'||value == 1) {
+                    if (value == '$document' || value == '$closeButton' || value == 1) {
                         $scope.onReloadGame();
                     }
                 },
@@ -130,7 +131,7 @@ LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $lo
                     if (value == 0) {
                         $scope.location.path("/");
                     }
-                    if (value == '$document'||value == '$closeButton'||value == 1) {
+                    if (value == '$document' || value == '$closeButton' || value == 1) {
                         $scope.onReloadGame();
                     }
                 },

@@ -56,6 +56,7 @@ var Clock = function(id) {
                 width: 6,
                 height: 55
             });
+            // hour.setScale({y:-1});
             layerHour.add(hour);
             layerHour.draw();
         }
@@ -68,6 +69,7 @@ var Clock = function(id) {
                 width: 6,
                 height: 75
             });
+            // minute.setScale({y:-1});
             layerMinute.add(minute);
             layerMinute.draw();
         }
