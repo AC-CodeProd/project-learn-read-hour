@@ -136,8 +136,11 @@ body {
         color: #fff;
     }
     .choice {
+        display: flex;
         margin-top: 5px;
         margin-bottom: 10px;
+        justify-content: center;
+        align-items: center;
     }
     .h {
         font-size: 6em;

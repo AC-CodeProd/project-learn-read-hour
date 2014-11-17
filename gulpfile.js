@@ -3,6 +3,9 @@ var plugins = require("gulp-load-plugins")({
     pattern: ['gulp-*', 'gulp.*'],
     replaceString: /\bgulp[\-.]/
 });
+var protractor = plugins.protractor.protractor;
+var webdriver_update = plugins.protractor.webdriver_update;
+var webdriver_standalone = plugins.protractor.webdriver_standalone;
 
 var pathsSrc = {
     index: 'src/index.html',
@@ -68,26 +71,29 @@ gulp.task('images', function() {
         }))
         .pipe(gulp.dest('build/assets/img'));
 });
+gulp.task('connect', function() {
+  return plugins.connect.server({
+    root: 'build',
+    host:'127.0.0.1',
+    port: 9000
+  });
+});
 
-var protractor = plugins.protractor.protractor;
-var webdriver_update = plugins.protractor.webdriver_update;
-var webdriver_standalone = plugins.protractor.webdriver_standalone;
+gulp.task('webdriver-update', webdriver_update);
+gulp.task('webdriver-standalone',["webdriver-update"], webdriver_standalone);
 
-gulp.task('webdriver_update', webdriver_update);
-gulp.task('webdriver_standalone', webdriver_standalone);
-
-gulp.task('test_protractor', ["webdriver_update"], function(cb) {
+gulp.task('test-protractor', function(cb) {
     return gulp.src('tests/scenarios/functional-tests.js', {
         read: false
     }).pipe(protractor({
         configFile: 'tests/protractor.config.js'
     })).on('error', function(e) {
         console.log(e);
-    }).on('end', cb);
+    });
 });
 
-gulp.task('test', function() {
-    gulp.start('test_protractor');
+gulp.task('test',['connect'], function() {
+    gulp.start('test-protractor');
 });
 
 gulp.task('watch', function() {
@@ -103,4 +109,4 @@ gulp.task('watch', function() {
         server.changed(event.path);
     });
 });
-gulp.task('default', ['watch', 'index', 'partials', 'less', 'images', 'font-awesome', 'fonts', 'scripts']);
+gulp.task('default', ['watch','connect', 'index', 'partials', 'less', 'images', 'font-awesome', 'fonts', 'scripts']);
