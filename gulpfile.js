@@ -69,6 +69,26 @@ gulp.task('images', function() {
         .pipe(gulp.dest('build/assets/img'));
 });
 
+var protractor = plugins.protractor.protractor;
+var webdriver_update = plugins.protractor.webdriver_update;
+var webdriver_standalone = plugins.protractor.webdriver_standalone;
+
+gulp.task('webdriver_update', webdriver_update);
+gulp.task('webdriver_standalone', webdriver_standalone);
+
+gulp.task('test_protractor', ["webdriver_update"], function(cb) {
+    return gulp.src('tests/scenarios/functional-tests.js', {
+        read: false
+    }).pipe(protractor({
+        configFile: 'tests/protractor.config.js'
+    })).on('error', function(e) {
+        console.log(e);
+    }).on('end', cb);
+});
+
+gulp.task('test', function() {
+    gulp.start('test_protractor');
+});
 
 gulp.task('watch', function() {
     var server = plugins.livereload();
