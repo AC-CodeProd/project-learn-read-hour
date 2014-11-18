@@ -30,7 +30,7 @@ describe('Test game', function() {
     it('should popup failure', function() {
         startButton.click();
         verifyButton.click();
-        // _protractor.sleep(2500);
+        _protractor.sleep(2500);
     });
 
 });

@@ -4,6 +4,8 @@
 ## Getting Started
 
 ### Prerequisites
+You must have [node.js](http://nodejs.org/) and npm installed before going further.
+
 * [Gulp](http://gulpjs.com/) - The streaming build system
 * [Bower](http://bower.io/) - A package manager for the web
 
@@ -30,7 +32,7 @@ Once the installation is done, just run:
 gulp
 ```
 
-You can access it [here](http://127.0.0.1:9000)
+You can access it [here](http://127.0.0.1:9000){target="_blank"}
 
 ### Testing
 

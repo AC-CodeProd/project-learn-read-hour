@@ -51,6 +51,15 @@ gulp.task('index', function() {
         .pipe(plugins.useref())
         .pipe(gulp.dest('build'));
 });
+gulp.task('index-run',function(callback){
+    runSequence('less','scripts', 'index', callback);
+});
+gulp.task('index-run-less',function(callback){
+    runSequence('less', 'index', callback);
+});
+gulp.task('index-run-scripts',function(callback){
+    runSequence('scripts','index', callback);
+});
 gulp.task('partials', function() {
     return gulp.src(pathsSrc.partials)
         .pipe(gulp.dest('build/partials'));
@@ -99,6 +108,8 @@ gulp.task('tests-protractor', function(cb) {
         configFile: 'tests/protractor.config.js'
     })).on('error', function(e) {
         console.log(e);
+    }).on("end", function() {
+        plugins.connect.serverClose();
     });
 });
 
@@ -108,12 +119,12 @@ gulp.task('tests', ['connect'], function() {
 
 gulp.task('watch', function() {
     var server = plugins.livereload();
-    gulp.watch(pathsSrc.index, ['index']);
+    gulp.watch(pathsSrc.index, ['index-run']);
     gulp.watch(pathsSrc.partials, ['partials']);
     gulp.watch(pathsSrc.fontAwesome, ['font-awesome']);
     gulp.watch(pathsSrc.fonts, ['fonts']);
-    gulp.watch(pathsSrc.lessWatch, ['less']);
-    gulp.watch(pathsSrc.scripts, ['scripts']);
+    gulp.watch(pathsSrc.lessWatch, ['index-run-less']);
+    gulp.watch(pathsSrc.scripts, ['index-run-scripts']);
     gulp.watch(pathsSrc.images, ['images']);
     gulp.watch([pathsBuild.index, pathsBuild.css, pathsBuild.scripts, pathsBuild.images]).on('change', function(event) {
         server.changed(event.path);
