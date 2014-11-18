@@ -1,3 +1,4 @@
+'use strict';
 var Clock = function(id) {
     var _self = this;
     var stage;

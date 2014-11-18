@@ -3,6 +3,9 @@ var plugins = require("gulp-load-plugins")({
     pattern: ['gulp-*', 'gulp.*'],
     replaceString: /\bgulp[\-.]/
 });
+var del = require('del');
+var runSequence = require('run-sequence');
+
 var protractor = plugins.protractor.protractor;
 var webdriver_update = plugins.protractor.webdriver_update;
 var webdriver_standalone = plugins.protractor.webdriver_standalone;
@@ -23,6 +26,10 @@ var pathsBuild = {
     images: 'build/assets/img/**/*'
 };
 
+gulp.task('clean', function(cb) {
+    return del(['build','.tmp'], cb);
+});
+
 gulp.task('font-awesome', function() {
     return gulp.src(pathsSrc.fontAwesome)
         .pipe(gulp.dest('build/assets/fonts/font-awesome'));
@@ -36,6 +43,10 @@ gulp.task('index', function() {
     return gulp.src(pathsSrc.index)
         .pipe(plugins.plumber())
         .pipe(assets)
+        .pipe(plugins.if('*.js', plugins.uglify({
+            mangle: false
+        })))
+        .pipe(plugins.if('*.css', plugins.minifyCss()))
         .pipe(assets.restore())
         .pipe(plugins.useref())
         .pipe(gulp.dest('build'));
@@ -51,7 +62,8 @@ gulp.task('less', function() {
         .pipe(plugins.autoprefixer("last 8 version", "> 1%", "ie 8", "ie 7"), {
             cascade: true
         })
-        .pipe(gulp.dest('build/css'));
+        .pipe(plugins.minifyCss())
+        .pipe(gulp.dest('.tmp/css'));
 });
 gulp.task('scripts', function() {
     return gulp.src(pathsSrc.scripts)
@@ -60,8 +72,7 @@ gulp.task('scripts', function() {
             mangle: false
         }))
         .pipe(plugins.jshint())
-        .pipe(plugins.jsmin())
-        .pipe(gulp.dest('build/js'));
+        .pipe(gulp.dest('.tmp/js'));
 });
 gulp.task('images', function() {
     return gulp.src(pathsSrc.images)
@@ -71,15 +82,15 @@ gulp.task('images', function() {
         .pipe(gulp.dest('build/assets/img'));
 });
 gulp.task('connect', function() {
-  return plugins.connect.server({
-    root: 'build',
-    host:'127.0.0.1',
-    port: 9000
-  });
+    return plugins.connect.server({
+        root: 'build',
+        host: '127.0.0.1',
+        port: 9000
+    });
 });
 
 gulp.task('webdriver-update', webdriver_update);
-gulp.task('webdriver-start',["webdriver-update"], webdriver_standalone);
+gulp.task('webdriver-start', ["webdriver-update"], webdriver_standalone);
 
 gulp.task('tests-protractor', function(cb) {
     return gulp.src('tests/scenarios/functional-tests.js', {
@@ -91,7 +102,7 @@ gulp.task('tests-protractor', function(cb) {
     });
 });
 
-gulp.task('tests',['connect'], function() {
+gulp.task('tests', ['connect'], function() {
     gulp.start('tests-protractor');
 });
 
@@ -108,4 +119,7 @@ gulp.task('watch', function() {
         server.changed(event.path);
     });
 });
-gulp.task('default', ['watch','connect', 'index', 'partials', 'less', 'images', 'font-awesome', 'fonts', 'scripts']);
+
+gulp.task('default', function(callback) {
+    runSequence('clean','watch', 'connect', 'less', 'images', 'font-awesome', 'fonts', 'scripts', 'partials', 'index', callback);
+});
