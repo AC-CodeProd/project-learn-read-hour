@@ -116,11 +116,11 @@
                     template: '
                 <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
-                <img class="img-responsive" src="../build/assets/img/success.png" alt="Bravo !">
+                <img class="img-responsive" src="assets/img/success.png" alt="Bravo !">
                 </div>
                 <div class="ngdialog-buttons">
-                    <button type="button" class="button col-lg-6" ng-click="closeThisDialog(0)" ><img class="img-responsive" src="../build/assets/img/button_menu.png" alt="Menu"></button>
-                    <button type="button" class="button col-lg-6" ng-click="closeThisDialog(1)"><img class="img-responsive" src="../build/assets/img/button_replay.png" alt="Rejouer"></button>
+                    <button type="button" class="button col-lg-6" ng-click="closeThisDialog(0)" ><img class="img-responsive" src="assets/img/button_menu.png" alt="Menu"></button>
+                    <button type="button" class="button col-lg-6" ng-click="closeThisDialog(1)"><img class="img-responsive" src="assets/img/button_replay.png" alt="Rejouer"></button>
                 </div>
                 </div>',
                     plain: true
@@ -140,12 +140,12 @@
                     template: '
                 <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
-                <img class="img-responsive" src="../build/assets/img/fail.png" alt="Raté !">
+                <img class="img-responsive" src="assets/img/fail.png" alt="Raté !">
                 <p>L\'heure exacte était : {{clock.hour}} h {{clock.minute}}</p>
                 </div>
                 <div class="ngdialog-buttons">
-                    <button type="button" class="button col-lg-6" ng-click="closeThisDialog(0)"><img class="img-responsive" src="../build/assets/img/button_menu.png" alt="Menu"></button>
-                    <button type="button" class="button col-lg-6" ng-click="closeThisDialog(1)"><img class="img-responsive" src="../build/assets/img/button_replay.png" alt="Rejouer"></button>
+                    <button type="button" class="button col-lg-6" ng-click="closeThisDialog(0)"><img class="img-responsive" src="assets/img/button_menu.png" alt="Menu"></button>
+                    <button type="button" class="button col-lg-6" ng-click="closeThisDialog(1)"><img class="img-responsive" src="assets/img/button_replay.png" alt="Rejouer"></button>
                 </div>
                 </div>',
                     plain: true

@@ -6,7 +6,6 @@ var plugins = require("gulp-load-plugins")({
 var protractor = plugins.protractor.protractor;
 var webdriver_update = plugins.protractor.webdriver_update;
 var webdriver_standalone = plugins.protractor.webdriver_standalone;
-
 var pathsSrc = {
     index: 'src/index.html',
     partials: 'src/partials/*',
@@ -80,9 +79,9 @@ gulp.task('connect', function() {
 });
 
 gulp.task('webdriver-update', webdriver_update);
-gulp.task('webdriver-standalone',["webdriver-update"], webdriver_standalone);
+gulp.task('webdriver-start',["webdriver-update"], webdriver_standalone);
 
-gulp.task('test-protractor', function(cb) {
+gulp.task('tests-protractor', function(cb) {
     return gulp.src('tests/scenarios/functional-tests.js', {
         read: false
     }).pipe(protractor({
@@ -92,8 +91,8 @@ gulp.task('test-protractor', function(cb) {
     });
 });
 
-gulp.task('test',['connect'], function() {
-    gulp.start('test-protractor');
+gulp.task('tests',['connect'], function() {
+    gulp.start('tests-protractor');
 });
 
 gulp.task('watch', function() {

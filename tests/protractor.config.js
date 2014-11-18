@@ -6,7 +6,6 @@ exports.config = {
         'browserName': 'chrome'
     },
     baseUrl: 'http://127.0.0.1:9000',
-    // specs: ['scenarios/functional-tests.js'],
     jasmineNodeOpts: {
         showColors: true,
         defaultTimeoutInterval: 30000,
