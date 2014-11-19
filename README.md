@@ -32,7 +32,7 @@ Once the installation is done, just run:
 gulp
 ```
 
-You can access it [here](http://127.0.0.1:9000){target="_blank"}
+You can access it [here](http://127.0.0.1:9000)
 
 ### Testing
 

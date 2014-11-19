@@ -69,35 +69,43 @@
         };
 
         $scope.onIncreaseHour = function() {
-            if ($scope.hour < 24)
-                $scope.hour++;
-            if ($scope.hour == 24)
+            if ($scope.hour == 24) {
                 $scope.hour = 0;
+            } else if ($scope.hour < 24) {
+                $scope.hour++;
+                if ($scope.hour == 24) {
+                    $scope.hour = 0;
+                }
+            }
         };
 
         $scope.onIncreaseMinute = function() {
-            if ($scope.minute < 60)
-                $scope.minute += 5;
             if ($scope.minute == 60) {
                 $scope.minute = 0;
                 $scope.onIncreaseHour();
+            } else if ($scope.minute < 60) {
+                $scope.minute += 5;
+                if ($scope.minute == 60) {
+                    $scope.minute = 0;
+                    $scope.onIncreaseHour();
+                }
             }
         };
 
         $scope.onDecreasedHour = function() {
-            if ($scope.hour != 0)
-                $scope.hour--;
             if ($scope.hour == 0) {
                 $scope.hour = 23;
+            } else if ($scope.hour != 0) {
+                $scope.hour--;
             }
         };
 
         $scope.onDecreasedMinute = function() {
-            if ($scope.minute != 0)
-                $scope.minute -= 5;
             if ($scope.minute == 0) {
                 $scope.minute = 55;
                 $scope.onDecreasedHour();
+            } else if ($scope.minute != 0) {
+                $scope.minute -= 5;
             }
         };
 

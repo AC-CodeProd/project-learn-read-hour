@@ -6,10 +6,10 @@ body {
     font-size: 100%;
     padding-top: 30px;
     user-select: none;
-    background: url(../assets/img/background.png) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    background: url(../assets/img/background.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top center;
     background-size: cover;
 }
 * {
@@ -40,7 +40,7 @@ body {
         margin-left: 30px;
     }
     .info {
-        font-size: 2em;
+        font-size: 3em;
         text-align: center;
         color: #fff;
     }
@@ -103,9 +103,12 @@ body {
         border: 5px solid #d6d6d6;
         border-radius: 10px;
         background-color: #fff;
+        width: 400px;
         p {
-            font-size: 2em;
-            font-weight: bold;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-top: 15px;
+            margin-bottom: 15px;
             color: #000;
         }
     }
