@@ -7,9 +7,9 @@
             <button class="button" id="" ng-click="onIncreaseHour()"  title="Augmenter heure"><img class="img-responsive" src="assets/img/button_up.png" alt="Augmenter heure"></button>
             <button class="button" id="" ng-click="onDecreasedHour()" title="Diminué heure"><img class="img-responsive" src="assets/img/button_down.png" alt="Diminué heure"></button>
         </div>
-        <input type="text" id="hour" class="dial hour col-xs-3 col-lg-3" ng-model="hour" title="Heure" required>
+        <input type="text" id="hour" class="dial hour col-xs-3 col-lg-3" ng-model="hour" title="Heure" ac-max-length-input="2" ac-max-numbers="23" required>
         <p class="h col-xs-2 col-lg-2" >h</p>
-        <input type="text" id="minute" class="dial minute col-xs-3 col-lg-3" ng-model="minute" title="Minute" ng-maxlength="2" required>
+        <input type="text" id="minute" class="dial minute col-xs-3 col-lg-3" ng-model="minute" title="Minute" ac-max-length-input="2" ac-max-numbers="55" required>
         <div class="col-xs-2 col-lg-2">
             <button class="button" id="" ng-click="onIncreaseMinute()"  title="Augmenter minute"><img class="img-responsive" src="assets/img/button_up.png" alt="Augmenter minute"></button>
             <button class="button" id="" ng-click="onDecreasedMinute()" title="Diminué minute"><img class="img-responsive" src="assets/img/button_down.png" alt="Diminué minute"></button>

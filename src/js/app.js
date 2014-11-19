@@ -26,6 +26,47 @@
     /**
      * Factory & Directive
      **/
+    LearnReadHour.directive('acMaxLengthInput', function() {
+        return {
+            require: 'ngModel',
+            link: function(scope, element, attrs, ngModelCtrl) {
+                var maxlength = Number(attrs.acMaxLengthInput);
+
+                function maxLengthInput(text) {
+                    if (text.length > maxlength) {
+                        var transformedInput = text.substring(0, maxlength);
+                        ngModelCtrl.$setViewValue(transformedInput);
+                        ngModelCtrl.$render();
+                        return transformedInput;
+                    }
+                    return text;
+                }
+                ngModelCtrl.$parsers.push(maxLengthInput);
+            }
+        };
+    });
+    LearnReadHour.directive('acMaxNumbers', function() {
+        return {
+            require: 'ngModel',
+            link: function(scope, element, attrs, ngModelCtrl) {
+                var max = Number(attrs.acMaxNumbers);
+
+                function maxNumbers(value) {
+                    if (isNaN(value)) {
+                        ngModelCtrl.$setViewValue(0);
+                        ngModelCtrl.$render();
+                        return 0;
+                    } else if (value > max) {
+                        ngModelCtrl.$setViewValue(value.substring(0, 1));
+                        ngModelCtrl.$render();
+                        return value.substring(0, 1);
+                    }
+                    return value;
+                }
+                ngModelCtrl.$parsers.push(maxNumbers);
+            }
+        };
+    });
 
     /**
      * Controller
@@ -39,6 +80,7 @@
     LearnReadHour.controller('StartCtrl', function($rootScope, $scope, ngDialog, $location, $timeout) {
         $scope.location = $location;
         $scope.clock = {};
+        // console.log((15 % 5));
         $scope.onStartGame = function() {
             var clock = new Clock('clock-canvas');
             $scope.hour = 0;
@@ -80,12 +122,12 @@
         };
 
         $scope.onIncreaseMinute = function() {
-            if ($scope.minute == 60) {
+            if ($scope.minute >= 60) {
                 $scope.minute = 0;
                 $scope.onIncreaseHour();
             } else if ($scope.minute < 60) {
-                $scope.minute += 5;
-                if ($scope.minute == 60) {
+                $scope.minute = Number($scope.minute) + 5;
+                if ($scope.minute >= 60) {
                     $scope.minute = 0;
                     $scope.onIncreaseHour();
                 }
@@ -106,6 +148,10 @@
                 $scope.onDecreasedHour();
             } else if ($scope.minute != 0) {
                 $scope.minute -= 5;
+                if ($scope.minute < 0) {
+                    $scope.minute = 55;
+                    $scope.onDecreasedHour();
+                }
             }
         };
 
