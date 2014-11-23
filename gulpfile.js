@@ -12,9 +12,9 @@ var webdriver_standalone = plugins.protractor.webdriver_standalone;
 var pathsSrc = {
     index: 'src/index.html',
     partials: 'src/partials/*',
-    less: ['src/less/*.less', '!src/less/components/**/*.less', '!src/less/modules/*.less', '!src/less/utilities/**/*.less'],
+    less: ['src/less/*.less', '!src/less/components/**/*.less', '!src/less/modules/**/*.less', '!src/less/utilities/**/*.less'],
     lessWatch: ['src/less/**/*.less'],
-    scripts: ['src/js/*.js', '!src/js/datas.js'],
+    scripts: ['src/js/**/*.js'],
     images: 'src/assets/img/**/*',
     fonts: 'src/assets/fonts/**/*',
     fontAwesome: 'libraries/font-awesome-4.2.0/fonts/*'
@@ -108,6 +108,7 @@ gulp.task('tests-protractor', function(cb) {
         configFile: 'tests/protractor.config.js'
     })).on('error', function(e) {
         console.log(e);
+        plugins.connect.serverClose();
     }).on("end", function() {
         plugins.connect.serverClose();
     });

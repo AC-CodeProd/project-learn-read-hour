@@ -57,7 +57,6 @@ var Clock = function(id) {
                 width: 6,
                 height: 55
             });
-            // hour.setScale({y:-1});
             layerHour.add(hour);
             layerHour.draw();
         }
@@ -70,7 +69,6 @@ var Clock = function(id) {
                 width: 6,
                 height: 75
             });
-            // minute.setScale({y:-1});
             layerMinute.add(minute);
             layerMinute.draw();
         }
@@ -91,12 +89,12 @@ var Clock = function(id) {
         _self.onRotateMinute(degMinute);
     }
     _self.onRotateHour = function(deg) {
-        layerHour.rotate(deg);
+        layerHour.rotation(deg);
         layerHour.draw();
     };
 
     _self.onRotateMinute = function(deg) {
-        layerMinute.rotate(deg);
+        layerMinute.rotation(deg);
         layerMinute.draw();
     };
 

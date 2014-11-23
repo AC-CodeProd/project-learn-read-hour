@@ -1,3 +1,4 @@
+'use strict';
 describe('Test game', function() {
     var main = element(by.id('main'));
     var returnButton = element(by.id('return'));
@@ -13,7 +14,7 @@ describe('Test game', function() {
         _protractor.waitForAngular();
         browser.driver.manage().window().maximize();
         browser.get('http://127.0.0.1:9000/#/');
-        _protractor.sleep(500);
+        _protractor.sleep(1000);
     });
 
     it('should have a title', function() {

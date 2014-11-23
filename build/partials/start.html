@@ -1,19 +1,13 @@
-<button class="button-return" id="return" onclick="location.href='#'"  title="Retour"><img class="img-responsive" src="assets/img/retour.png" alt="Retour"></button>
+<button class="button-return" id="return" onclick="location.href='#/'"  title="Retour"><img class="img-responsive" src="assets/img/retour.png" alt="Retour"></button>
 <section class="panel-start-game col-lg-4 col-lg-offset-4">
     <div id="clock-canvas" class="clock-canvas"></div>
     <p class="info" ng-bind="clock.info"></p>
     <div class="choice row">
-        <div class="col-xs-2 col-lg-2">
-            <button class="button" id="" ng-click="onIncreaseHour()"  title="Augmenter heure"><img class="img-responsive" src="assets/img/button_up.png" alt="Augmenter heure"></button>
-            <button class="button" id="" ng-click="onDecreasedHour()" title="Diminué heure"><img class="img-responsive" src="assets/img/button_down.png" alt="Diminué heure"></button>
-        </div>
-        <input type="text" id="hour" class="dial hour col-xs-3 col-lg-3" ng-model="hour" title="Heure" ac-max-length-input="2" ac-that-numbers="23" required>
+        <ac-increase-decrease ac-title-increase="Augmenter heure" ac-title-decreased="Diminué heure"  ng-model="hour" ac-limite='24' ac-rate='1'></ac-increase-decrease>
+        <input type="text" id="hour" class="dial hour col-xs-3 col-lg-3" ng-model="hour" title="Heure" ac-max-length-input="2" ac-max-numbers="23" required>
         <p class="h col-xs-2 col-lg-2" >h</p>
-        <input type="text" id="minute" class="dial minute col-xs-3 col-lg-3" ng-model="minute" title="Minute" ac-max-length-input="2" ac-that-numbers="55" required>
-        <div class="col-xs-2 col-lg-2">
-            <button class="button" id="" ng-click="onIncreaseMinute()"  title="Augmenter minute"><img class="img-responsive" src="assets/img/button_up.png" alt="Augmenter minute"></button>
-            <button class="button" id="" ng-click="onDecreasedMinute()" title="Diminué minute"><img class="img-responsive" src="assets/img/button_down.png" alt="Diminué minute"></button>
-        </div>
+        <input type="text" id="minute" class="dial minute col-xs-3 col-lg-3" ng-model="minute" title="Minute" ac-max-length-input="2" ac-max-numbers="55" required>
+        <ac-increase-decrease ac-title-increase="Augmenter minute" ac-title-decreased="Diminué minute" ac-value='minute' ac-limite='60' ac-rate='5' ng-model="minute"></ac-increase-decrease>
     </div>
     <button class="button" id="verify" ng-click="onMatchedTimeClock()"  title="Vérifier"><img class="img-responsive" src="assets/img/verify.png" alt="Vérifier"></button>
 </section>
